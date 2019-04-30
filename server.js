@@ -15,3 +15,10 @@ app.get('/location', (request, response) => {
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
+
+function Location(search_query, formatted_query, latitude, longitude) {
+  this.search_query = search_query;
+  this.formatted_query = formatted_query;
+  this.latitude = latitude;
+  this.longitude = longitude;
+}
