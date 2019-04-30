@@ -19,6 +19,15 @@ app.get('/location', (request, response) => {
   response.send(location);
 });
 
+app.get('/weather', (request, response) => {
+  const data = require('./data/darksky.json');
+  let forecast = data.currently.summary;
+  let time = new Date(data.currently.time).toString().slice(0, 15);
+  //new Date(obj.time).toString().slice(0, 15);
+  let weather = new Weather(forecast, time);
+  response.send(weather);
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
@@ -28,4 +37,9 @@ function Location(search_query, formatted_query, latitude, longitude) {
   this.formatted_query = formatted_query;
   this.latitude = latitude;
   this.longitude = longitude;
+}
+
+function Weather(forecast, time) {
+  this.forecast = forecast;
+  this.time = time;
 }
